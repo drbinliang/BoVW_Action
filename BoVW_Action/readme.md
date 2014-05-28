@@ -1,0 +1,1 @@
+### A simple framework of Bag-of-Visual-Words(BoVW) for action classification
