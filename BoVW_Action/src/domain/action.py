@@ -7,7 +7,7 @@ Created on 28/05/2014
 import os
 from utils import getCategoryIdByName
 import config
-from stip.stip_tools import StipTool
+from stip.stip_tool import StipTool
 import numpy as np
 
 class ActionSequence(object):
