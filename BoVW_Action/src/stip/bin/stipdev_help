@@ -1,0 +1,44 @@
+This program detects space-time interest points at multiple
+space-time scales and computes corresponding descriptors.
+See README for the type of point detectors/descriptors
+that are currently implemented.
+
+Usage:
+
+Input/Output options:
+   -f   : input video file
+   -ff  : first frame index
+   -lf  : last frame index
+   -o   : file name for saving detected features
+   -cam : the camera number (starts from 0)
+          (if you don't specify any number, it shows a dialog for choosing a camera)
+   -res : camera resolution for processing
+          the following resolutions are available
+            0 : 80  x 60
+            1 : 160 x 120 (default)
+            2 : 320 x 240
+            3 : 400 x 300
+            4 : 640 x 480
+
+Detection options:
+   -nplev : number of levels in spatial frame pyramid (default=3)
+            factor 2 subsampling is used; for each pyramid level
+            points are detected at four combinations of spatial
+            and temporal scales obtained by Gaussian smoothing
+            with spatial variance sigma2={4.0,8.0} and
+            temporal variance tau2={2.0,4.0}
+   -plev0 : initial level of spatial frame pyramid (default=0)
+   -kparam: K parameter in Harris function (default=0.00050)
+   -thresh: threshold for ommiting weak points (default=1.000e-009)
+            (to get all interest points set to zero)
+   -border: reject interest points within image boundary (default=5)
+
+Descriptor options:
+   -dscr  : type of descriptor [hoghof|hog|hof|hnf] (default=hoghof)
+   -szf   : factor used to compute descriptor patch size (default=5.0)
+            patch size along spatial/temporal dimensions is defined as
+            size_dim=szf*2*sqrt(Gauss variance_dim)
+
+Other options:
+   -h    : shows this message
+   -vis  : [yes|no] visulization stuffs (default=yes)

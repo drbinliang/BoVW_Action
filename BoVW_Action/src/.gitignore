@@ -1,0 +1,8 @@
+/stip_features
+/cv
+/pred
+/allFeatures.npy
+/codebook_500.npy
+/codebook.npy
+/testActionSequence.npy
+/trainActionSequence.npy

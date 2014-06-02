@@ -1,0 +1,11 @@
+This program displays pre-detected space-time interest points
+and optionally creates a video with s-t points overlayed on the
+original video.
+
+Usage:
+   -v  filename : input video file name
+   -f  filename : input STIP features file name
+   -o  filename : output video file name (optional)
+   -ff integer  : first frame (optional)
+   -lf integer  : last frame (optional)
+   -p           : pause after each frame
