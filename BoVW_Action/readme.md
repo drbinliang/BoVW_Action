@@ -7,16 +7,19 @@
 * numpy-MKL-1.8.1
 * scipy-0.14.0
 
+
 #### Dataset:
 * [KTH Action Database](http://www.nada.kth.se/cvap/actions/)
 * We follow the normal settings in [previous works](http://www.nada.kth.se/cvap/actions/00sequences.txt) 
 
+
 #### DESCRIPTION
 * Feature extraction: [STIP](http://www.di.ens.fr/~laptev/download.html#stip)
-* Feature Encoding: Vector Quantization, Hard assignment
-* Pooling and normalization: sum pooling, L1-norm
+* Feature Encoding: Vector Quantization, Sparse Coding
+* Pooling method: sum pooling, max pooling
+* Normalization method: L1-norm, L2-norm
 * Classification: RBF-Kernel SVM
-* Other feature encoding, pooling and normalization methods will be added in the future
+* More feature encoding, pooling and normalization methods will be added in the future
 
 
 #### CONTACT INFORMATION

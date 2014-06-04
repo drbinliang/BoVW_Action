@@ -11,6 +11,7 @@ import numpy as np
 from bovw.bag_of_words import BagOfWords
 from validation.cross_validation import crossValidate
 from recognition.svm_tool import SvmTool
+from utils import plotConfusionMatrix, removeall
 
 def main():
     actionDatabaseDir = config.actionDatabaseDir
@@ -63,7 +64,14 @@ def main():
             
     ## Step.2 Codebook generation
     print "Codebook generation ..."
-    bovw = BagOfWords()
+    bovw = BagOfWords(featureEncodingMethod = 'sparse-coding',
+                      poolingMethod = 'max-pooling',
+                      normalizationMethod = 'L2-norm')
+
+#     bovw = BagOfWords(featureEncodingMethod = 'vector-quantization',
+#                   poolingMethod = 'sum-pooling',
+#                   normalizationMethod = 'L1-norm')
+    
     if os.path.exists('codebook.npy'):
         codebook = np.load('codebook.npy')
         bovw.codebook = codebook
@@ -97,6 +105,10 @@ def main():
     # Feature encoding for test data and classify data using learned model
     print "Predicating ..."
     numCorrect = 0
+    trueLabels = []
+    testPredLabels = []
+    removeall(config.predctDir)
+    
     for actionSequence in testActionSequence:
         # Feature encoding, pooling, normalization
         actionSequence.generateFinalFeatures(bovw)
@@ -121,11 +133,23 @@ def main():
         
         if predCagtegoryId == actionSequence.categoryId:
             numCorrect += 1 
+            
+        trueLabels.append(actionSequence.categoryName)
+        testPredLabels.append(predCategoryName)
     
     # Calculate results
     accuracy = numCorrect / float(len(testActionSequence))
     print "accuracy: ", accuracy
-        
+    
+    # Plot confusion matrix
+    saveFilename = 'confusion_matrix.png'
+    plotConfusionMatrix(trueLabels, testPredLabels, 
+                        saveFilename, normalization = False)
+    
+    saveFilename = 'confusion_matrix_norm.png'
+    plotConfusionMatrix(trueLabels, testPredLabels, 
+                        saveFilename, normalization = True)
+
 
 if __name__ == '__main__':
     main()
